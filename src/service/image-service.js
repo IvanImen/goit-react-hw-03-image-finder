@@ -1,37 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const PixabayComponent = () => {
-  const [images, setImages] = useState([]);
-  const apiKey = '40463763-cd16d3875a37d36e07b72dd03';
-  const searchQuery = 'cat'; // Замініть це на ваш запит
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const apiUrl = `https://pixabay.com/api/?q=cat&page=1&key={apiKey}&image_type=photo&orientation=horizontal&per_page=12`;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        setImages(data.hits);
-      } catch (error) {
-        console.error('Помилка при виконанні запиту:', error);
-      }
-    };
-
-    fetchImages();
-  }, [searchQuery, apiKey]);
-
-  return (
-    <div>
-      <h2>Pixabay Images</h2>
-      <ul>
-        {images.map(image => (
-          <li key={image.id}>
-            <img src={image.webformatURL} alt={image.tags} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+const API_KEY = '40463763-cd16d3875a37d36e07b72dd03';
+export const PER_PAGE = 12;
+axios.defaults.baseURL = 'https://pixabay.com/api/';
+axios.defaults.params = {
+  key: API_KEY,
+  image_type: 'photo',
+  orientation: 'horizontal',
+  per_page: PER_PAGE,
 };
 
-export default PixabayComponent;
+export const getImages = async (query, page) => {
+  try {
+    const resp = await axios.get(`?q=${query}&page=${page}`);
+    console.log('resp :>> ', resp);
+    return resp.data;
+  } catch (err) {
+    new Error(`You have error: ${err.message}`);
+  }
+};
