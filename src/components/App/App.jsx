@@ -1,4 +1,4 @@
-import { Searchbar, ImageGallery, Button, Text } from 'components';
+import { Searchbar, ImageGallery, Button, Text, Modal } from 'components';
 import React, { Component } from 'react';
 
 import * as ImageService from 'service/image-service';
