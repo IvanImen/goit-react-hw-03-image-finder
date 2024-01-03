@@ -55,6 +55,7 @@ export class App extends Component {
         {this.state.buttonShow && (
           <Button onClick={this.nextPage}>Load more</Button>
         )}
+        <Modal></Modal>
       </>
     );
   }
