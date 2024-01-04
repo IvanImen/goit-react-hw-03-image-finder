@@ -1,4 +1,11 @@
-import { Searchbar, ImageGallery, Button, Text, Modal } from 'components';
+import {
+  Searchbar,
+  ImageGallery,
+  Button,
+  Text,
+  Modal,
+  Loader,
+} from 'components';
 import React, { Component } from 'react';
 
 import * as ImageService from 'service/image-service';
@@ -10,6 +17,8 @@ export class App extends Component {
     error: null,
     page: 1,
     buttonShow: false,
+    selectedImageId: '',
+    isLoading: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -26,12 +35,11 @@ export class App extends Component {
   };
 
   getImages = async () => {
+    this.setState({ isLoading: true });
     const { search, page } = this.state;
     try {
       const searchResult = await ImageService.getImages(search, page);
-      console.log('searchResult :>> ', searchResult);
-      console.log('searchResult.totalHits :>> ', searchResult.totalHits);
-      console.log('ImageService.PER_PAGE :>> ', ImageService.PER_PAGE);
+
       this.setState(prevState => ({
         images: [...prevState.images, ...searchResult.hits],
         buttonShow:
@@ -39,6 +47,8 @@ export class App extends Component {
       }));
     } catch (error) {
       this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
     }
   };
 
@@ -46,16 +56,33 @@ export class App extends Component {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
+  openModal = id => {
+    this.setState({ selectedImageId: id });
+  };
+
+  closeModal = () => {
+    this.setState({ selectedImageId: '' });
+  };
+
   render() {
+    const selectedImage = this.state.images.find(
+      image => image.id === this.state.selectedImageId
+    );
+
     return (
       <>
         <Searchbar onSubmit={this.searchImages} />
+        {this.state.isLoading && <Loader></Loader>}
         {this.state.error && <Text>{this.state.error}</Text>}
-        <ImageGallery images={this.state.images} />
+        <ImageGallery images={this.state.images} onClick={this.openModal} />
         {this.state.buttonShow && (
           <Button onClick={this.nextPage}>Load more</Button>
         )}
-        <Modal></Modal>
+        {this.state.selectedImageId && (
+          <Modal onClose={this.closeModal}>
+            <img src={selectedImage.largeImageURL} alt={selectedImage.tags} />
+          </Modal>
+        )}
       </>
     );
   }
