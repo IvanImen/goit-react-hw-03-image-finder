@@ -1,15 +1,21 @@
 import styled from '@emotion/styled';
 
-export const ImageGallery = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-
-  grid-gap: ${({ theme }) => theme.spacing(5)};
+export const SectionStyled = styled.section`
+  padding-top: 160px;
 `;
 
-export const ImageGalleryItem = styled.li`
+export const ImageGalleryStyled = styled.ul`
+  max-width: calc((100vh - 72px - 40px - 24px - 16px * 2) * 1.6);
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1;
 `;

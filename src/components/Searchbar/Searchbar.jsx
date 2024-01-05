@@ -1,6 +1,13 @@
 import { Component } from 'react';
 
-import { FiSearch } from 'react-icons/fi';
+import {
+  BtnStyled,
+  ContainerStyled,
+  FormStyled,
+  HeaderStyled,
+  IconStyled,
+  InputStyled,
+} from './Searchbar.styled';
 // import { FormBtn, InputSearch, SearchbarStyled } from './Searchbar.styled';
 
 export class Searchbar extends Component {
@@ -20,24 +27,25 @@ export class Searchbar extends Component {
 
   render() {
     return (
-      <header>
-        <form onSubmit={this.handleSubmit}>
-          <button type="submit">
-            <FiSearch size="16px" />
-          </button>
-
-          <input
-            type="text"
-            name="search"
-            onChange={this.handleChange}
-            value={this.state.search}
-            required
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-          />
-        </form>
-      </header>
+      <HeaderStyled>
+        <ContainerStyled>
+          <FormStyled onSubmit={this.handleSubmit}>
+            <BtnStyled type="submit">
+              <IconStyled size="24px" />
+            </BtnStyled>
+            <InputStyled
+              type="text"
+              name="search"
+              onChange={this.handleChange}
+              value={this.state.search}
+              required
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images and photos"
+            />
+          </FormStyled>
+        </ContainerStyled>
+      </HeaderStyled>
     );
   }
 }

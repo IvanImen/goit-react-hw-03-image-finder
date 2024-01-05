@@ -40,10 +40,17 @@ export class App extends Component {
     try {
       const searchResult = await ImageService.getImages(search, page);
 
+      // if (!searchResult.hits.length) {
+      //   new Error('No Images Found');
+      // }
       this.setState(prevState => ({
         images: [...prevState.images, ...searchResult.hits],
         buttonShow:
           page < Math.ceil(searchResult.totalHits / ImageService.PER_PAGE),
+        error:
+          searchResult.totalHits === 0
+            ? `There is no images on query: ${search}`
+            : null,
       }));
     } catch (error) {
       this.setState({ error });

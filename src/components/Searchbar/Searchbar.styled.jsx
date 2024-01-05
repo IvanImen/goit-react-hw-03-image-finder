@@ -1,48 +1,56 @@
-// import styled from '@emotion/styled';
+import styled from '@emotion/styled';
+import { FiSearch } from 'react-icons/fi';
 
-// export const SearchbarStyled = styled.form`
-//   width: ${({ theme }) => theme.spacing(100)};
-//   margin-left: auto;
-//   margin-right: auto;
+export const HeaderStyled = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  background-color: #ffc93e;
+  z-index: 200;
+`;
 
-//   position: relative;
+export const ContainerStyled = styled.div`
+  max-width: 1230px;
+  padding: 0 15px;
+  margin: 0 auto;
+  /* outline: red 3px dashed; */
+`;
 
-//   margin-bottom: ${({ theme }) => theme.spacing(20)};
-// `;
+export const FormStyled = styled.form`
+  display: flex;
+  justify-content: center;
+`;
 
-// export const InputSearch = styled.input`
-//   width: 100%;
-//   height: ${({ theme }) => theme.spacing(14)};
+export const BtnStyled = styled.button`
+  padding: 8px 16px;
+  display: block;
+  background-color: #f1ad00;
+  &:hover,
+  &:focus {
+    background-color: #dca005;
+  }
+  border: none;
+  border-radius: 16px 0 0 16px;
+`;
 
-//   border-style: none;
-//   border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
-//   background-color: transparent;
+export const IconStyled = styled(FiSearch)`
+  stroke: #201d16;
+`;
 
-//   padding: ${({ theme }) => theme.spacing(4)};
-//   padding-right: ${({ theme }) => theme.spacing(10)};
-//   outline: none;
-
-//   transition: ${({ theme }) => theme.animation.cubicBezier};
-
-//   font-size: ${({ theme }) => theme.fontSizes.medium};
-//   color: ${({ theme }) => theme.colors.dark};
-//   font-weight: 300;
-//   letter-spacing: 0.03em;
-
-//   &::placeholder {
-//     font-weight: 200;
-//   }
-// `;
-
-// export const FormBtn = styled.button`
-//   width: 50px;
-//   height: 50px;
-
-//   font-size: 20px;
-//   font-weight: bold;
-//   color: ${({ theme }) => theme.colors.dark};
-
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-// `;
+export const InputStyled = styled.input`
+  padding: 20px 10px;
+  display: block;
+  border-radius: 0 16px 16px 0;
+  border: #dca005 2px solid;
+  outline: none;
+  font-size: 18px;
+  color: #201d16;
+  &::placeholder {
+    color: #f1ad00;
+  }
+  &:focus {
+    border: #201d16 2px solid;
+  }
+`;
